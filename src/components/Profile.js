@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Profile = ({ profile }) => {
+  const [showText, setShowText] = useState(true);
+  const [data, setData] = useState();
+
   if (!profile) {
     return (
       <div className="vh-100 d-flex justify-content-center align-items-center">
@@ -9,9 +12,21 @@ const Profile = ({ profile }) => {
     );
   }
 
+  if (data !== profile) {
+    setShowText(false);
+    setData(profile);
+    setTimeout(() => {
+      setShowText(true);
+    }, 500);
+  }
+
+  // useEffect(() => {
+  //   setShowText(profile);
+  // }, [showText]);
+
   return (
     <>
-      <section class="vh-100">
+      <section class={`vh-100 card5 ${showText ? "card1" : "card2"}`}>
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-lg-11 mb-4 mb-lg-0">
@@ -34,7 +49,7 @@ const Profile = ({ profile }) => {
                         style={{ width: "80px" }}
                       />
                     </div>
-                    <h5>@{profile ? profile.profile.username : ""}</h5>
+                    <h5>@{data ? data.profile.username : ""}</h5>
                   </div>
                   <div class="col-md-7">
                     <div class="card-body p-4">
@@ -44,24 +59,22 @@ const Profile = ({ profile }) => {
                         <div class="col-12 mb-3">
                           <h6>Full Name</h6>
                           <p class="text-muted">
-                            {profile ? profile.profile.firstName : ""}{" "}
-                            {profile ? profile.profile.lastName : ""}
+                            {data ? data.profile.firstName : ""}{" "}
+                            {data ? data.profile.lastName : ""}
                           </p>
                         </div>
                       </div>
                       <div class="row pt-1">
                         <div class="col-12 mb-3">
                           <h6>Job Title</h6>
-                          <p class="text-muted">
-                            {profile ? profile.jobTitle : ""}
-                          </p>
+                          <p class="text-muted">{data ? data.jobTitle : ""}</p>
                         </div>
                       </div>
                       <div class="row pt-1">
                         <div class="col-12 mb-3">
                           <h6>Email</h6>
                           <p class="text-muted">
-                            {profile ? profile.profile.email : ""}
+                            {data ? data.profile.email : ""}
                           </p>
                         </div>
                       </div>
