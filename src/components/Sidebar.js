@@ -18,7 +18,13 @@ const Sidebar = ({ users, onUserClick }) => {
                   onUserClick(user);
                   setSelectedUser(index);
                 }}
+                className="d-flex gap-2 align-items-center"
               >
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                  alt="image"
+                  style={{ width: "25px", height: "25px" }}
+                />
                 {user.profile.firstName} {user.profile.lastName}
               </p>
             </>
